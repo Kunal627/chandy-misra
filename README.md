@@ -11,15 +11,15 @@ example of input site matrix:
 
 Input Matrix: Is provided in csv format, where row and columns represent site and 1 in value represents a link 
 
-0,1,0,0,0
-0,0,1,0,0
-0,0,0,1,0
-0,0,0,0,1
-1,0,0,0,0
+0,1,0,0,0 <br />
+0,0,1,0,0 <br />
+0,0,0,1,0 <br />
+0,0,0,0,1 <br />
+1,0,0,0,0 <br />
 
 is interpreted as following
 
-     S1    S2     S3    S4   S5
+    S1    S2     S3    S4   S5
 S1   0     1      0     0    0
 
 S2   0     0      1     0    1
@@ -32,8 +32,8 @@ S5   1     0      0     0    0
 
 This implies there is an edge with start from row site to column site
 
-S1 ---> S2 ---> S3 ---> S4 ---> S5
-^                               |
+S1 ---> S2 ---> S3 ---> S4 ---> S5 <br />
+^                               |  <br />
 |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
 
 initsite
