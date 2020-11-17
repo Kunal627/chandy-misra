@@ -30,9 +30,11 @@ S3   0     0      0     1    0
 S4   0     0      0     0    1
 
 S5   1     0      0     0    0
-
+</pre>
 
 This implies there is an edge with start from row site to column site
+
+<pre>
 
 S1 ---> S2 ---> S3 ---> S4 ---> S5 
 ^                               | 
