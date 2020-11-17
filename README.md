@@ -31,13 +31,13 @@ S4   0     0      0     0    1
 
 S5   1     0      0     0    0
 
-</pre>
 
 This implies there is an edge with start from row site to column site
 
-S1 ---> S2 ---> S3 ---> S4 ---> S5 <br />
-^                               |  <br />
+S1 ---> S2 ---> S3 ---> S4 ---> S5 
+^                               | 
 |_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _|
+</pre>
 
 initsite
 ========
@@ -53,6 +53,8 @@ For the site matrix above the program will flag a Dead lock as site 1 is visited
 
 EX2:
 ====
+
+<pre>
 0,1,0,0,0
 0,0,1,0,0
 0,0,0,1,0
@@ -65,10 +67,12 @@ S1 --> S2 --> S3 --> S4 --> S5
                       ^      |
                       |_ _ _ |
 
+</pre>
 
 EX3:
 ====
 
+<pre>
 0,1,0,0,0
 0,0,1,0,0
 0,0,0,1,0
@@ -79,6 +83,7 @@ say site 1 is the initiator, There is no cycle and this will NOT result in Deadl
 
 S1 --> S2 --> S3 --> S4 --> S5
 
+</pre>
 
 How to run the program
 ======================
