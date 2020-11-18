@@ -75,6 +75,7 @@ EX3:
 ====
 
 <pre>
+
 0,1,0,0,0
 0,0,1,0,0
 0,0,0,1,0
@@ -87,6 +88,27 @@ S1 --> S2 --> S3 --> S4 --> S5
 
 </pre>
 
+EX4:
+====
+
+<pre>
+
+0,1,1,0,0
+0,0,0,1,0
+0,0,0,1,0
+0,1,0,0,0
+0,0,0,0,0
+
+say site 1 is the initiator, There is cycle (Node S2 and Node S4) and this will result in Deadlock.
+  
+ +----> S2 <------+ 
+ |                |
+ |                | 
+ |                v
+S1 ---> S3 ----> S4
+
+</pre>
+
 How to run the program
 ======================
 1. Prerequisites - Install Python 3.7. 
@@ -94,5 +116,10 @@ How to run the program
    pip install -r requirements.txt
 3. Navigate to the chandy-misra\src directory and run the following command to execute the program 
    python .\chandymisra.py -path <provide input file path here> -initsite <provide initiating site number>
+
+Output:
+======
+The program prints the message on console with the path traced on the graph. <br />
+It also creates a network graph in the output directory
 
    

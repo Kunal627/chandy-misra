@@ -10,7 +10,7 @@ import os
 import numpy as np
 import pandas as pd
 import argparse
-from config.constants import DEFAULTPATH, DEFAULTSITE
+from config.constants import DEFAULTPATH, DEFAULTSITE, OUTPATH
 import matplotlib.pyplot as plt
 import networkx as nx
 
@@ -24,28 +24,23 @@ class ChandyMisra:
         self.data = pd.read_csv(path, header=None)
         return self.data.to_numpy()
 
-    def showgraph(self):
-        G = nx.from_pandas_adjacency(self.data)
-        G.name = "Network"
-        print(nx.info(G))
-        nx.draw(G)
+    def draw_graph(self):
+        graph = [(j+1, i+1) for i in range(self.data.shape[0]) for j in range(self.data.shape[1]) if self.data[i][j] == 1]
+        G = nx.DiGraph()
+        G.add_edges_from(graph) 
+        G.add_nodes_from([node + 1 for node in range(len(self.data[1]))])
+        G.number_of_nodes()
+        G.number_of_edges()
+        fig = plt.figure()
+        nx.draw(G, ax=fig.add_subplot(111), with_labels=True, font_weight='bold',connectionstyle='arc3, rad = 0.1')
+        return fig
 
-    def show_graph_with_labels(self, mylabels):
-        adjacency_matrix = self.data.to_numpy()
-        mylabels = self.data.columns
-        
-        rows, cols = np.where(adjacency_matrix == 1)
-        edges = zip(rows.tolist(), cols.tolist())
-        gr = nx.Graph()
-        gr.add_edges_from(edges)
-        nx.draw(gr, node_size=500, labels=None, with_labels=False)
-        plt.show()
  
 
 def probe(data, init, k, visited):
 
     if k+1 in visited:
-        print("Deadlock detected!! Node {} visited again!".format(k+1))
+        print("Deadlock detected!! Node {} visited again!  A cycle is found.".format(k+1))
         sys.exit()
 
     visited.append(k+1)
@@ -53,7 +48,7 @@ def probe(data, init, k, visited):
         if data[k][x] == 1:
             if init == x:
                 print("init {}  start {}  ---->  end {}".format(init+1, k+1, x+1))
-                print("Deadlock detected!! Node {} visited again!".format(init+1))
+                print("Deadlock detected!! Node {} visited again! A cycle is found.".format(init+1))
                 sys.exit()
             print("init {}  start {}  ---->  end {}".format(init+1, k+1, x+1))
             return probe(data, init, x,visited)
@@ -89,10 +84,16 @@ def validateargs(parseargs):
 def main():
     args = parseargs()
     path, init = validateargs(args)
-
+    
+    # Instantiate the Chandy Misra class and read the adjacency matrix from file
     cm = ChandyMisra()
     graph = cm.readGraph(path)
+    
+    # save the network graph to out location
+    fig = cm.draw_graph()
+    fig.savefig(OUTPATH)
 
+    # exit if the initiating site do not belong to the network
     if init > graph.shape[0]:
         print("Initiator node s{} not in the network".format(str(init)))
         print("Provide a valid initiator. Exiting!!!")
@@ -107,6 +108,8 @@ def main():
             print("init {}  start {}  ---->  end {}".format(init, j+1, k+1))
             #probe(graph, k, k)
             probe(graph, j, k, visited)
+        visited = []
+    
 
 
 
