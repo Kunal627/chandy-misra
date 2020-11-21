@@ -23,9 +23,8 @@ The following wait for graph
 
 
 S1 --->  S2 ---> S3 ---> S4  
-^			                    |
-|_ _ _ _ _ _ _ _ _ _ _ _ _|  
-
+^                         |
+| _ _ _ _ _ _ _ _ _ _ _ _ |
 
 Is represented by following adjacency matrix
 
